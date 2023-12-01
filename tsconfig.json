@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "module": "NodeNext",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "ES2022",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "noImplicitAny": true,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@constants/*": ["./src/constants/*"],
+      "@decorators/*": ["./src/decorators/*"],
+      "@guards/*": ["./src/guards/*"],
+      "@interceptors/*": ["./src/interceptors/*"],
+      "@interfaces/*": ["./src/interfaces/*"],
+      "@middleware/*": ["./src/middleware/*"],
+      "@v1/*": ["src/modules/v1/*"],
+      "@prisma/*": ["./src/prisma/*"],
+      "@utils/*": ["./src/utils/*"]
+    }
+  }
+}
