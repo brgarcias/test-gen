@@ -1,9 +1,10 @@
+# Nest.js API - Test Gen
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
 
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
+  <p align="center">  A Nest.js-powered API for managing products. This API is designed for use in a product management system and provides essential features for handling products and related information.</p>
     <p align="center">
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
@@ -17,16 +18,45 @@
     <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
   <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
 </p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+
+## Table of Contents
+
+- [Nest.js API - Test Gen](#nestjs-api---test-gen)
+  - [Table of Contents](#table-of-contents)
+  - [Description](#description)
+    - [Login Doc](#login-doc)
+    - [User Test for API](#user-test-for-api)
+  - [API Access](#api-access)
+  - [Installation](#installation)
+  - [Running the app](#running-the-app)
+  - [Test](#test)
+  - [Support](#support)
+  - [Stay in touch](#stay-in-touch)
+  - [License](#license)
 
 ## Description
 
-### test-gen
+This Nest.js API serves as a backend for a product management system. It is built with a focus on efficiency and scalability, providing RESTful endpoints for managing products. The API includes authentication, and you can find the API documentation with Swagger at [https://testgen.onrender.com/docs](https://testgen.onrender.com/docs).
 
-Nodejs API REST - Product Manager.
+### Login Doc
+
+- **Username:** test-gen
+- **Password:** 123
+
+### User Test for API
+
+- **Email:** <bruno-151299@hotmail.com>
+- **Password:** bruno123
+
+**Add Authorization Header:** Bearer + accessToken
+
+## API Access
+
+- **API URL:** [https://testgen.onrender.com/v1](https://testgen.onrender.com/v1)
 
 ## Installation
+
+Use the package manager [pnpm](https://pnpm.io/) to install dependencies:
 
 ```bash
 pnpm install
@@ -64,9 +94,8 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 ## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- Author - [Bruno Garcia](bruno-151299@hotmail.com "email")
+- Website - [Portfolio](https://brgarcias-portfolio.netlify.app/ "portfolio")
 
 ## License
 
