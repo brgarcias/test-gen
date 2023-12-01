@@ -4,25 +4,41 @@ services:
   app:
     build: .
     container_name: app
-    entrypoint: dockerize -wait tcp://db:5432 -timeout 20s docker-entrypoint.sh pnpm start:dev
     volumes:
     - .:/home/node/app
     tty: true
+    ports:
+      - '3001:3001'
+    environment:
+      DATABASE_URL: postgresql://root:root@db:5432/test-gen
+      REDIS_URL: redis://redis:6379
     depends_on:
       - db
       - redis
+    networks:
+      - app-network
   
   db:
     image: postgres:latest
     container_name: db
     ports:
       - "5432:5432"
-    env_file:
-      - .env
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: test-gen
+    networks:
+      - app-network
   
   redis:
     container_name: redis
     image: redis:6
     restart: always
     ports:
-      - '14930:14930'
+      - '6379:6379'
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
