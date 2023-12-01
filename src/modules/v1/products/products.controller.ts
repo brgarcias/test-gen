@@ -21,7 +21,9 @@ import {
   ApiBearerAuth,
   ApiBody,
   ApiConflictResponse,
+  ApiCreatedResponse,
   ApiExtraModels,
+  ApiFoundResponse,
   ApiInternalServerErrorResponse,
   ApiNoContentResponse,
   ApiNotFoundResponse,
@@ -74,7 +76,7 @@ export class ProductsController {
    * @throws {BadRequestException}
    */
   @ApiBody({ type: CreateProductDto })
-  @ApiOkResponse({
+  @ApiCreatedResponse({
     schema: {
       type: 'object',
       properties: {
@@ -83,7 +85,7 @@ export class ProductsController {
         },
       },
     },
-    description: '201. Success. Returns a product',
+    description: '201. Success. Create product',
   })
   @ApiBadRequestResponse({
     schema: {
@@ -148,7 +150,7 @@ export class ProductsController {
    * @returns Promise<SuccessResponseInterface>
    * @throws {BadRequestException}
    */
-  @ApiOkResponse({
+  @ApiFoundResponse({
     schema: {
       type: 'object',
       properties: {
@@ -157,7 +159,7 @@ export class ProductsController {
         },
       },
     },
-    description: '200. Success. Returns all products',
+    description: '302. Success. Returns all products',
   })
   @ApiNotFoundResponse({
     description: '404. NotFoundException. Products not found',
@@ -204,7 +206,7 @@ export class ProductsController {
    * @returns Promise<SuccessResponseInterface>
    * @throws {NotFoundException}
    */
-  @ApiOkResponse({
+  @ApiFoundResponse({
     schema: {
       type: 'object',
       properties: {
@@ -213,7 +215,7 @@ export class ProductsController {
         },
       },
     },
-    description: '200. Success. Returns a product',
+    description: '302. Success. Returns a product',
   })
   @ApiNotFoundResponse({
     description: '404. NotFoundException. Product was not found',
@@ -248,12 +250,12 @@ export class ProductsController {
    * * Get Method for Product Installments Retrieval by id
    * @api {get} /products/:id/installments/:qty
    * @param {id} id of the product
-   * @param {qty} quantity of installments
+   * @param {qty} qty of installments
    * @description Get one Product Installments by id
    * @returns Promise<SuccessResponseInterface>
    * @throws {NotFoundException}
    */
-  @ApiOkResponse({
+  @ApiFoundResponse({
     schema: {
       type: 'object',
       properties: {
@@ -262,7 +264,7 @@ export class ProductsController {
         },
       },
     },
-    description: '200. Success. Returns a product',
+    description: '302. Success. Returns a product',
   })
   @ApiNotFoundResponse({
     description: '404. NotFoundException. Product was not found',
@@ -318,7 +320,7 @@ export class ProductsController {
         },
       },
     },
-    description: '201. Success. Returns a product',
+    description: '200. Success! Product updated.',
   })
   @ApiBadRequestResponse({
     schema: {
@@ -382,11 +384,11 @@ export class ProductsController {
    * @api {delete} /products/:id
    * @param {id} id of the product
    * @description Delete one Product by id
-   * @returns Promise<{}>
+   * @returns Promise<Record<string, never>>
    * @throws {NotFoundException}
    */
   @ApiNoContentResponse({
-    description: 'no content',
+    description: '204. Success! Product removed.',
   })
   @ApiNotFoundResponse({
     description: '404. NotFoundException. Product was not found',

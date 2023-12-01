@@ -5,7 +5,9 @@ import {
   SwaggerModule,
   DocumentBuilder,
   SwaggerCustomOptions,
+  SwaggerDocumentOptions,
 } from '@nestjs/swagger';
+import cookieParser from 'cookie-parser';
 import basicAuth from 'express-basic-auth';
 import { AppModule } from './modules/app/app.module';
 import { PrismaNotFoundExceptionFilter } from './exception-filters/prisma-not-found.exception-filter';
@@ -48,16 +50,21 @@ function configureSwaggerDocumentation(app: INestApplication): void {
     customSiteTitle: 'Test Gen API V1.0',
   };
 
-  const swaggerDocumentOptions = new DocumentBuilder()
+  const swaggerDocumentOptions: SwaggerDocumentOptions = {
+    operationIdFactory: (controllerKey: string, methodKey: string) => methodKey,
+  };
+
+  const swaggerDocumentBuilder = new DocumentBuilder()
     .setTitle('Test Gen API V1.0')
     .setDescription('Test Gen API Documentation')
-    .addServer(`${host}:${port}`, process.env.APP_ENV)
+    .addServer(host, process.env.APP_ENV)
     .setVersion('1.0')
     .addBearerAuth({ in: 'header', type: 'http' })
     .build();
 
   const swaggerDocument = SwaggerModule.createDocument(
     app,
+    swaggerDocumentBuilder,
     swaggerDocumentOptions,
   );
   SwaggerModule.setup('docs', app, swaggerDocument, swaggerOptions);
@@ -67,6 +74,7 @@ function configureGlobalSettings(app: INestApplication): void {
   app.enableShutdownHooks();
   app.useGlobalPipes(new ValidationPipe({ errorHttpStatusCode: 422 }));
   app.useGlobalFilters(new PrismaNotFoundExceptionFilter());
+  app.use(cookieParser());
 }
 
 async function startApplication(app: INestApplication): Promise<void> {
