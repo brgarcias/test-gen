@@ -1,19 +1,17 @@
-FROM node:19-slim
+FROM node:19-alpine
 
 WORKDIR /home/node/app
 
-RUN apt-get update && apt-get install -y wget
+COPY package*.json ./
 
-ENV DOCKERIZE_VERSION v0.6.1
-RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
-    && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
-    && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+RUN npm i --force
 
-COPY . .
-
-RUN npm install -g pnpm
-RUN pnpm install
+RUN apk --no-cache add curl
+RUN curl -L https://github.com/jwilder/dockerize/releases/download/v0.6.1/dockerize-alpine-linux-amd64 -o /usr/local/bin/dockerize \
+    && chmod +x /usr/local/bin/dockerize
 
 COPY . .
 
 EXPOSE 3001
+
+CMD ["./docker-entrypoint.sh"]
