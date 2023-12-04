@@ -79,7 +79,7 @@ function configureGlobalSettings(app: INestApplication): void {
 
 async function startApplication(app: INestApplication): Promise<void> {
   await app.listen(port);
-  console.log(`Application is running on: ${host}:${port}`);
+  console.log(`Application is running on: ${host}`);
 }
 
 bootstrap();

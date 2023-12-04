@@ -14,6 +14,7 @@ import {
   Query,
   BadRequestException,
   NotFoundException,
+  UseInterceptors,
 } from '@nestjs/common';
 // NESTJS SWAGGER
 import {
@@ -50,6 +51,8 @@ import { SuccessResponseInterface } from '@interfaces/success-response.interface
 // DECORATORS
 import Serialize from '@decorators/serialization.decorator';
 import { Roles } from '@decorators/roles.decorator';
+// INTERCEPTORS
+import WrapResponseInterceptor from '@interceptors/wrap-response.interceptor';
 // SERVICE
 import { CategoriesService } from './categories.service';
 // DTO'S
@@ -63,6 +66,7 @@ import {
 
 @ApiTags('Categories')
 @ApiExtraModels(CategoryResponseEntity)
+@UseInterceptors(WrapResponseInterceptor)
 @Controller()
 export class CategoriesController {
   constructor(private readonly categoriesService: CategoriesService) {}
