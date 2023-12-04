@@ -14,6 +14,7 @@ import {
   Query,
   BadRequestException,
   NotFoundException,
+  UseInterceptors,
 } from '@nestjs/common';
 // NESTJS SWAGGER
 import {
@@ -21,7 +22,9 @@ import {
   ApiBearerAuth,
   ApiBody,
   ApiConflictResponse,
+  ApiCreatedResponse,
   ApiExtraModels,
+  ApiFoundResponse,
   ApiInternalServerErrorResponse,
   ApiNoContentResponse,
   ApiNotFoundResponse,
@@ -48,6 +51,8 @@ import { SuccessResponseInterface } from '@interfaces/success-response.interface
 // DECORATORS
 import Serialize from '@decorators/serialization.decorator';
 import { Roles } from '@decorators/roles.decorator';
+// INTERCEPTORS
+import WrapResponseInterceptor from '@interceptors/wrap-response.interceptor';
 // SERVICE
 import { CategoriesService } from './categories.service';
 // DTO'S
@@ -61,6 +66,7 @@ import {
 
 @ApiTags('Categories')
 @ApiExtraModels(CategoryResponseEntity)
+@UseInterceptors(WrapResponseInterceptor)
 @Controller()
 export class CategoriesController {
   constructor(private readonly categoriesService: CategoriesService) {}
@@ -74,7 +80,7 @@ export class CategoriesController {
    * @throws {BadRequestException}
    */
   @ApiBody({ type: CreateCategoryDto })
-  @ApiOkResponse({
+  @ApiCreatedResponse({
     schema: {
       type: 'object',
       properties: {
@@ -83,7 +89,7 @@ export class CategoriesController {
         },
       },
     },
-    description: '201. Success. Returns a category',
+    description: '201. Success. Create category',
   })
   @ApiBadRequestResponse({
     schema: {
@@ -146,7 +152,7 @@ export class CategoriesController {
    * @returns Promise<SuccessResponseInterface>
    * @throws {BadRequestException}
    */
-  @ApiOkResponse({
+  @ApiFoundResponse({
     schema: {
       type: 'object',
       properties: {
@@ -155,7 +161,7 @@ export class CategoriesController {
         },
       },
     },
-    description: '200. Success. Returns all categories',
+    description: '302. Success. Returns all categories',
   })
   @ApiNotFoundResponse({
     description: '404. NotFoundException. Categories not found',
@@ -202,7 +208,7 @@ export class CategoriesController {
    * @returns Promise<SuccessResponseInterface>
    * @throws {NotFoundException}
    */
-  @ApiOkResponse({
+  @ApiFoundResponse({
     schema: {
       type: 'object',
       properties: {
@@ -211,7 +217,7 @@ export class CategoriesController {
         },
       },
     },
-    description: '200. Success. Returns a category',
+    description: '302. Success! Return category.',
   })
   @ApiNotFoundResponse({
     description: '404. NotFoundException. Category was not found',
@@ -261,7 +267,7 @@ export class CategoriesController {
         },
       },
     },
-    description: '201. Success. Returns a category',
+    description: '200. Success! Category updated.',
   })
   @ApiBadRequestResponse({
     schema: {
@@ -323,11 +329,11 @@ export class CategoriesController {
    * @api {delete} /categories/:id
    * @param {id} id of the Category
    * @description Delete one Category by id
-   * @returns Promise<{}>
+   * @returns Promise<Record<string, never>>
    * @throws {NotFoundException}
    */
   @ApiNoContentResponse({
-    description: 'no content',
+    description: '204. Success! Category removed.',
   })
   @ApiNotFoundResponse({
     description: '404. NotFoundException. Category was not found',

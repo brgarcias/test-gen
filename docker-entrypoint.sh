@@ -6,4 +6,4 @@ npx prisma migrate deploy
 
 npm run build
 
-npm run start:dev
+npm run start:prod
