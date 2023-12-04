@@ -15,13 +15,13 @@ import {
 // NESTJS SWAGGER
 import {
   ApiTags,
-  ApiOkResponse,
   ApiNotFoundResponse,
   ApiBearerAuth,
   ApiUnauthorizedResponse,
   ApiParam,
   getSchemaPath,
   ApiExtraModels,
+  ApiFoundResponse,
 } from '@nestjs/swagger';
 // GUARDS
 import JwtAccessGuard from '@guards/jwt-access.guard';
@@ -60,7 +60,7 @@ export default class UsersController {
    * @returns Promise<SuccessResponseInterface>
    * @throws {NotFoundException}
    */
-  @ApiOkResponse({
+  @ApiFoundResponse({
     schema: {
       type: 'object',
       properties: {
@@ -86,6 +86,7 @@ export default class UsersController {
   @ApiParam({ name: 'id', type: String })
   @Get(':id')
   @UseGuards(JwtAccessGuard)
+  @HttpCode(HttpStatus.FOUND)
   @Serialize(AllUsersResponseEntity)
   async findOne(
     @Param('id', ParseIntPipe) id: number,
@@ -106,7 +107,7 @@ export default class UsersController {
    * @returns Promise<SuccessResponseInterface>
    * @throws {BadRequestException}
    */
-  @ApiOkResponse({
+  @ApiFoundResponse({
     schema: {
       type: 'object',
       properties: {
@@ -115,7 +116,7 @@ export default class UsersController {
         },
       },
     },
-    description: '200. Success. Returns all users',
+    description: '302. Success. Returns all users',
   })
   @ApiNotFoundResponse({
     description: '404. NotFoundException. Categories not found',

@@ -28,6 +28,8 @@ import {
   ApiNoContentResponse,
   ApiExtraModels,
   getSchemaPath,
+  ApiCreatedResponse,
+  ApiFoundResponse,
 } from '@nestjs/swagger';
 // NESTJS JWT
 import { JwtService } from '@nestjs/jwt';
@@ -96,7 +98,7 @@ export default class AuthController {
         },
       },
     },
-    description: 'Returns jwt tokens',
+    description: '200. Success! Returns jwt tokens',
   })
   @ApiBadRequestResponse({
     schema: {
@@ -149,8 +151,8 @@ export default class AuthController {
    * @throws {BadRequestException}
    */
   @ApiBody({ type: SignUpDto })
-  @ApiOkResponse({
-    description: '201, Success',
+  @ApiCreatedResponse({
+    description: '201. Success! User created.',
   })
   @ApiBadRequestResponse({
     schema: {
@@ -288,9 +290,9 @@ export default class AuthController {
    * @returns Promise<SuccessResponseInterface>
    * @throws {NotFoundException}
    */
-  @ApiOkResponse({
+  @ApiFoundResponse({
     type: UserResponseEntity,
-    description: '200, returns a decoded user from access token',
+    description: '302. Success! Returns a decoded user from access token',
   })
   @ApiUnauthorizedResponse({
     schema: {
@@ -312,6 +314,7 @@ export default class AuthController {
     description: '500. InternalServerError',
   })
   @ApiBearerAuth()
+  @HttpCode(HttpStatus.FOUND)
   @UseGuards(JwtAccessGuard)
   @Get('token')
   async getUserByAccessToken(
@@ -338,7 +341,7 @@ export default class AuthController {
    * @throws {BadRequestException}
    */
   @ApiNoContentResponse({
-    description: 'no content',
+    description: '204. Success! Logout.',
   })
   @ApiUnauthorizedResponse({
     schema: {

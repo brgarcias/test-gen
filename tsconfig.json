@@ -26,6 +26,7 @@
       "@interfaces/*": ["./src/interfaces/*"],
       "@middleware/*": ["./src/middleware/*"],
       "@v1/*": ["src/modules/v1/*"],
+      "@app/*": ["src/modules/app/*"],
       "@prisma/*": ["./src/prisma/*"],
       "@utils/*": ["./src/utils/*"]
     }

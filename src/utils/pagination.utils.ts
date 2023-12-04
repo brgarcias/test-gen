@@ -6,13 +6,12 @@ class PaginationUtils {
     location: string,
     paginationParams?: PaginationParamsInterface,
   ): string {
-    const port: number = parseInt(process.env.SERVER_PORT);
     const host: string = process.env.SERVER_HOST;
     if (!host) {
       throw new Error('SERVER_HOST parameter did not provide in env');
     }
 
-    let url = `${host}:${port}/${location}?`;
+    let url = `${host}/${location}?`;
     let count = 0;
     if (paginationParams) {
       if (paginationParams.page) {

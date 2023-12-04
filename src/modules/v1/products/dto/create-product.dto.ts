@@ -9,25 +9,45 @@ import {
 } from 'class-validator';
 
 export class CreateProductDto {
-  @ApiProperty({ type: String })
+  @ApiProperty({
+    required: true,
+    type: String,
+    maxLength: 191,
+    description: 'The product name',
+  })
   @MaxLength(191)
   @IsString()
   @IsNotEmpty()
   name: string;
 
-  @ApiProperty({ type: String })
+  @ApiProperty({
+    required: true,
+    type: String,
+    maxLength: 255,
+    description: 'The product description',
+  })
   @MaxLength(255)
   @IsString()
   @IsNotEmpty()
   description: string;
 
-  @ApiProperty({ type: Number })
-  @Min(0)
+  @ApiProperty({
+    required: true,
+    type: Number,
+    minimum: 1,
+    description: 'The product price',
+  })
+  @Min(1)
   @IsNumber()
   @IsNotEmpty()
   price: number;
 
-  @ApiProperty({ type: Number })
+  @ApiProperty({
+    required: true,
+    type: Number,
+    minimum: 1,
+    description: 'The product category id',
+  })
   @Min(1)
   @IsInt()
   @IsNotEmpty()
