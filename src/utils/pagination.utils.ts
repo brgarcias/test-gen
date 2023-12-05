@@ -31,16 +31,12 @@ class PaginationUtils {
   }
 
   private static normalizeParam(param?: string): number | false {
-    if (param) {
-      const tmp = parseInt(param, 10);
+    if (!param) return false;
 
-      if (Number.isNaN(tmp)) return false;
-      if (tmp <= 0) return false;
-
-      return tmp;
-    }
-
-    return false;
+    const tmp = parseInt(param, 10);
+    if (Number.isNaN(tmp)) return false;
+    if (tmp <= 0) return false;
+    return tmp;
   }
 
   public normalizeParams(params: {
@@ -54,14 +50,12 @@ class PaginationUtils {
     }
 
     const page = PaginationUtils.normalizeParam(params.page);
-    if (page) {
-      ret.page = page;
-    }
+    if (!page) return false;
+    ret.page = page;
 
     const limit = PaginationUtils.normalizeParam(params.limit);
-    if (limit) {
-      ret.limit = limit;
-    }
+    if (!limit) return false;
+    ret.limit = limit;
 
     const size = PaginationUtils.normalizeParam(params.size);
     if (size) {

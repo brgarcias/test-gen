@@ -6,7 +6,7 @@ import V1Module from '@v1/v1.module';
 import ValidationUserPermissionMiddleware from '@middleware/validate-user-permissions.middleware';
 import AuthModule from '@v1/auth/auth.module';
 import { AppController } from './app.controller';
-import { PrismaModule } from '@prisma/prisma.module';
+import { PrismaModule } from 'src/prisma/prisma.module';
 import { AppService } from './app.service';
 
 @Module({

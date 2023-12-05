@@ -8,6 +8,8 @@ export class CategoryResponseEntity {
 
   name: string = '';
 
+  interest: number = 1;
+
   createdAt: Date = new Date();
 
   updatedAt: Date = new Date();

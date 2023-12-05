@@ -78,6 +78,7 @@
     "typescript": "^5.3.2"
   },
   "jest": {
+    "preset": "ts-jest",
     "moduleFileExtensions": [
       "js",
       "json",
@@ -91,6 +92,20 @@
     "collectCoverageFrom": [
       "**/*.(t|j)s"
     ],
+    "moduleNameMapper": {
+      "^@constants/(.*)$": "<rootDir>/constants/$1",
+      "^@decorators/(.*)$": "<rootDir>/decorators/$1",
+      "^@guards/(.*)$": "<rootDir>/guards/$1",
+      "^@interceptors/(.*)$": "<rootDir>/interceptors/$1",
+      "^@interfaces/(.*)$": "<rootDir>/interfaces/$1",
+      "^@middleware/(.*)$": "<rootDir>/middleware/$1",
+      "^@v1/(.*)$": "<rootDir>/modules/v1/$1",
+      "^@app/(.*)$": "<rootDir>/modules/app/$1",
+      "^@utils/(.*)$": "<rootDir>/utils/$1",
+      "tsconfig-paths/register": [
+        "<rootDir>/node_modules/tsconfig-paths/register"
+      ]
+    },
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
   }
